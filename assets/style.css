@@ -1,0 +1,33 @@
+body {
+    font-family: 'Varela Round', sans-serif;
+}
+.navbar{
+    background-color: #8caba8;
+    margin-bottom: 1rem;
+}
+.navbar-brand {
+    margin: auto;
+    font-size: 2rem;
+}
+
+.rounded {
+    padding: 1rem;
+    line-height: 2rem;
+}
+.searchBorder{
+    border-style: none;
+    background-color: #dfdfde;
+    padding-top: 1rem;
+}
+.MYms-1 {
+    margin-left: 1rem
+  }
+.FiveDayCard{
+    margin:auto;
+} 
+.border{
+    border: 2px solid #a2798f!important;
+}
+.MyBorder {
+    background-color: #eee6e6;
+}
