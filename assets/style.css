@@ -1,6 +1,9 @@
 body {
     font-family: 'Varela Round', sans-serif;
 }
+.hidden {
+    display: none;
+}
 .navbar{
     background-color: #8caba8;
     margin-bottom: 1rem;
@@ -15,9 +18,8 @@ body {
     line-height: 2rem;
 }
 .searchBorder{
-    border-style: none;
     background-color: #dfdfde;
-    padding-top: 1rem;
+    padding: 1rem;
 }
 .MYms-1 {
     margin-left: 1rem
@@ -30,4 +32,26 @@ body {
 }
 .MyBorder {
     background-color: #eee6e6;
+}
+.icon {
+    max-width: 35px;
+}
+
+.low {
+    background-color: #31dd65;
+}
+.moderate {
+    background-color: #e2d812;
+}
+.high {
+    background-color: #e88211;
+}
+.veryhigh {
+    background-color: #e22812;
+}
+.extreme {
+    background-color: #5c12e2;
+}
+.iconDate {
+    font-weight: 900;
 }

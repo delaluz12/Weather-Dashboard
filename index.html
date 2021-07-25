@@ -34,59 +34,60 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md searchBorder">
-                <div class="input-group mb-3">
+                <form class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Search City" aria-label="city"
-                        aria-describedby="basic-addon2">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
+                        aria-describedby="basic-addon2" id="city">
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i
                             class="fas fa-search"></i></button>
-                </div>
+                </form>
                 <ul class="list-group">
                     <li class="list-group-item">Test item</li>
                 </ul>
 
             </div>
 
-            <div class="col-lg-8 col-md col-sm MYms-1">
+            <div class="col-lg-8 col-md col-sm MYms-1" id="searchResults">
                 <div class="row border rounded">
-                    <h2>City</h2>
-                    <div>Temperature: </div>
-                    <div>Humidity: </div>
-                    <div>Wind Speed: </div>
-                    <div>UV Index: </div>
-
+                    <div class="col-lg-8">
+                        <h2 id="cityName"></h2>
+                        <div id="currentTemp"></div>
+                        <div id="currentHum"></div>
+                        <div id="currentWind"></div>
+                        <div id="currentUV"></div>
+                    </div>
                 </div>
                 <br>
                 <div class="row">
                     <p class="ms-2"> 5-Day Forecast</p>
                     <div class="col-lg-2 col-md col-sm border MyBorder rounded FiveDayCard" id="1">
-                        <h4>Day</h4>
-                        <div>ICON</div>
-                        <div>Temp: </div>
-                        <div>Humidity: </div>
+                        <div  class="forecastDay">Day</div>
+                        <div  class="forecastIcon">ICON</div>
+                        <div  class="forecastTemp">Temp: </div>
+                        <div  class="forecastHum">Humidity: </div>
                     </div>
                     <div class="col-lg-2 col-md border MyBorder rounded FiveDayCard" id="2">
-                        <h4>Day</h4>
-                        <div>ICON</div>
-                        <div>Temp: </div>
-                        <div>Humidity: </div>
+                        <div class="forecastDay">Day</div>
+                        <div class="forecastIcon">ICON</div>
+                        <div class="forecastTemp">Temp: </div>
+                        <div class="forecastHum">Humidity: </div>
                     </div>
                     <div class="col-lg-2 col-md border MyBorder rounded FiveDayCard" id="3">
-                        <h4>Day</h4>
-                        <div>ICON</div>
-                        <div>Temp: </div>
-                        <div>Humidity: </div>
+                        <div class="forecastDay">Day</div>
+                        <div class="forecastIcon">ICON</div>
+                        <div class="forecastTemp">Temp: </div>
+                        <div class="forecastHum">Humidity: </div>
                     </div>
                     <div class="col-lg-2 col-md border MyBorder rounded FiveDayCard" id="4">
-                        <h4>Day</h4>
-                        <div>ICON</div>
-                        <div>Temp: </div>
-                        <div>Humidity: </div>
+                        <div class="forecastDay">Day</div>
+                        <div class="forecastIcon">ICON</div>
+                        <div class="forecastTemp">Temp: </div>
+                        <div class="forecastHum">Humidity: </div>
                     </div>
                     <div class="col-lg-2 col-md border MyBorder rounded FiveDayCard" id="5">
-                        <h4>Day</h4>
-                        <div>ICON</div>
-                        <div>Temp: </div>
-                        <div>Humidity: </div>
+                        <div class="forecastDay">Day</div>
+                        <div class="forecastIcon">ICON</div>
+                        <div class="forecastTemp">Temp: </div>
+                        <div class="forecastHum">Humidity: </div>
                     </div>
 
 
@@ -109,6 +110,8 @@
     <!-- jQuery UI -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
         integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <!-- moment -->
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
     <!-- my Script -->
     <script src="./assets/script.js"></script>
 </body>
