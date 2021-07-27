@@ -3,7 +3,7 @@ jQuery(function ($) {
     // Your code using failsafe $ alias here...
 
     $('#searchResults').addClass('hidden');
-   
+
 
 
     //DOM elements
@@ -16,16 +16,18 @@ jQuery(function ($) {
 
     //onlick or enter
     $('form').submit(function (event) {
-        event.preventDefault();
+
         //grab input for city search
         var citySearched = $('#city').val().trim();
-        console.log(jQuery.type(citySearched));
-        console.log(citySearched);
+
         //pass citySearched to current weather data
         getCurrentWeather(citySearched);
         get5dayForecast(citySearched);
         saveLocalStorage(citySearched);
+        createBtn(citySearched);
 
+
+        event.preventDefault();
     });
 
 
@@ -237,26 +239,85 @@ jQuery(function ($) {
     };
 
     var saveLocalStorage = function (city) {
-        //check if any are already stored
-        var storedCities = JSON.parse(localStorage.getItem('cityHistory'));
-        console.log(storedCities);
-        
-        
-        if (storedCities == null){
-            alert('stored cities comes back == null');
-            //set array 
-             var storedCitiesArr =  [city];
-            JSON.stringify(localStorage.setItem('cityHistory', storedCitiesArr));
-            console.log(storedCitiesArr);
-        } else {
-            alert('idk');
+        var addCity = city;
 
+        //check if any are already stored
+        if (localStorage.getItem('cityHistory') == null) {
+            localStorage.setItem('cityHistory', '[]');
         }
-        // add to array
-        // storedCities.push(city);
-        // console.log(storedCities);
-        
-        
+
+        //get any existing values, parse, and add new values
+        var existingCityHistory = JSON.parse(localStorage.getItem('cityHistory'));
+        existingCityHistory.unshift(addCity);
+
+        //save new values to local storage - stringfy
+        localStorage.setItem('cityHistory', JSON.stringify(existingCityHistory));
+
+
+
     }
+
+    var createBtn = function (city) {
+        var newBtn = '<button class="list-group-item ">' + city + '</button>'
+        $('.list-group').prepend(newBtn)
+
+        $('button.list-group-item').on('click', function (event) {
+
+            console.log($(this).text());
+
+            var cityClicked = $(this).text();
+
+            getCurrentWeather(cityClicked);
+            get5dayForecast(cityClicked);
+
+
+
+        });
+
+    }
+
+    //render Search History function
+    var renderSearchHistory = function () {
+
+        var searchHistory = JSON.parse(localStorage.getItem('cityHistory'));
+        console.log(searchHistory);
+        // check if empty 
+        if (localStorage.getItem('cityHistory') != null) {
+
+            //loop through each item in array and create button for each el in array
+            searchHistory.forEach(function (index) {
+
+                $('.list-group').append('<button class="list-group-item ">' + index + '</button>');
+            })
+        }
+
+
+
+    }
+
+    renderSearchHistory();
+
+
+    $('button.list-group-item').on('click', function (event) {
+
+        console.log($(this).text());
+
+        var cityClicked = $(this).text();
+
+        getCurrentWeather(cityClicked);
+        get5dayForecast(cityClicked);
+
+
+
+    });
+    $('#resetBtn').on('click', function (event) {
+        if (localStorage.getItem('cityHistory') !== null){
+            $('.list-group-item').remove();  
+            localStorage.clear();
+              
+        }
+        
+    })
+    
 
 });

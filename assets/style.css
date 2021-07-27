@@ -26,6 +26,7 @@ body {
   }
 .FiveDayCard{
     margin:auto;
+    padding: 0.5rem;
 } 
 .border{
     border: 2px solid #a2798f!important;
