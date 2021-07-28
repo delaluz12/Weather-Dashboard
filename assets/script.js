@@ -26,7 +26,6 @@ jQuery(function ($) {
         saveLocalStorage(citySearched);
         createBtn(citySearched);
 
-
         event.preventDefault();
     });
 
