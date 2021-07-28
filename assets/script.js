@@ -4,16 +4,6 @@ jQuery(function ($) {
 
     $('#searchResults').addClass('hidden');
 
-
-
-    //DOM elements
-    var cityName = document.getElementById('cityName');
-    var weatherIcon = document.getElementById('weatherIcon');
-    var currentTemp = document.getElementById('currentTemp');
-    var currentHum = document.getElementById('currentHum');
-    var currentWind = document.getElementById('currentWind');
-    var currentUV = document.getElementById('currentUV');
-
     //onlick or enter
     $('form').submit(function (event) {
 
@@ -26,24 +16,24 @@ jQuery(function ($) {
         saveLocalStorage(citySearched);
         createBtn(citySearched);
 
+
         event.preventDefault();
     });
 
-
     var getCurrentWeather = function (city) {
         var url = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=bf1335613e05b00a462dbf64e0325625';
-        console.log(url);
+        
 
         //make call with url for current weather & forecast
         fetch(url)
             .then(function (response) {
                 if (response.ok) {
                     //cors repsonse
-                    // console.log(response);
+                    
                     //covert to json
                     response.json().then(function (data) {
                         // parse to object
-                        // console.log(data);
+                        
                         var name = data.name;
 
                         var kelvin = data.main.temp;
@@ -98,7 +88,6 @@ jQuery(function ($) {
             });
 
     }
-
     var get5dayForecast = function (city) {
         var url = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=bf1335613e05b00a462dbf64e0325625';
 
@@ -106,9 +95,9 @@ jQuery(function ($) {
         fetch(url)
             .then(function (response) {
                 if (response.ok) {
-                    console.log(response);
+                    // console.log(response);
                     response.json().then(function (data) {
-                        console.log(data);
+                        
                         //coordinates for UX Index and forecast call
                         var lat = data.coord.lat;
                         var lon = data.coord.lon;
@@ -120,20 +109,6 @@ jQuery(function ($) {
                                 .then(function (response) {
                                     if (response.ok) {
                                         response.json().then(function (data) {
-                                            console.log(data);
-
-                                            //date
-                                            console.log(moment.unix(data.daily[1].dt).format('L'));
-
-
-                                            //icon
-                                            console.log(data.daily[1].weather[0].icon);
-                                            //temp
-                                            console.log(data.daily[1].temp.max);
-
-                                            console.log((((data.daily[1].temp.max) - 273.15) * 1.8000 + 32.00).toFixed());
-                                            //humidity
-                                            console.log(data.daily[1].humidity);
 
                                             var forecastArr = [];
 
@@ -151,7 +126,7 @@ jQuery(function ($) {
                                                 forecastArr.push(obj);
 
                                             };
-                                            console.log(forecastArr);
+                                            
                                             //pass array to displayForecast function
                                             displayForecast(forecastArr);
 
@@ -179,20 +154,20 @@ jQuery(function ($) {
         var iconUrl = 'https://openweathermap.org/img/wn/' + iconID + '@2x.png';
 
         // display city name and icon
-        $(cityName).html(city + '<img id="weatherIcon" src=' + iconUrl + '>');
+        $('#cityName').html(city + '<img id="weatherIcon" src=' + iconUrl + '>');
         $('#weatherIcon').addClass('icon');
 
         //display current temperature
-        $(currentTemp).text('Temperature: ' + temperature + '°F');
+        $('#currentTemp').text('Temperature: ' + temperature + '°F');
 
         //display current humidity
-        $(currentHum).text('Humidity: ' + humidity + '%');
+        $('#currentHum').text('Humidity: ' + humidity + '%');
 
         //display current Windspeed
-        $(currentWind).text('Wind Speed: ' + WindSpeed + ' mph');
+        $('#currentWind').text('Wind Speed: ' + WindSpeed + ' mph');
 
         //display current UV index
-        $(currentUV).html('UV Index: ' + '<span class="badge">' + uvIndex + '</span>');
+        $('#currentUV').html('UV Index: ' + '<span class="badge">' + uvIndex + '</span>');
 
         //color code UV index
         if (0 <= uvIndex && uvIndex <= 2) {
@@ -213,7 +188,7 @@ jQuery(function ($) {
     };
 
     var displayForecast = function (array) {
-        console.log(array);
+        
         $('.forecastDay').each(function (index) {
             //display date
             $(this).addClass('iconDate');
@@ -257,12 +232,11 @@ jQuery(function ($) {
     }
 
     var createBtn = function (city) {
+        //create button for city searched
         var newBtn = '<button class="list-group-item ">' + city + '</button>'
         $('.list-group').prepend(newBtn)
-
+        //add click event
         $('button.list-group-item').on('click', function (event) {
-
-            console.log($(this).text());
 
             var cityClicked = $(this).text();
 
@@ -279,8 +253,8 @@ jQuery(function ($) {
     var renderSearchHistory = function () {
 
         var searchHistory = JSON.parse(localStorage.getItem('cityHistory'));
-        console.log(searchHistory);
-        // check if empty 
+        
+        // check if not empty 
         if (localStorage.getItem('cityHistory') != null) {
 
             //loop through each item in array and create button for each el in array
@@ -296,10 +270,10 @@ jQuery(function ($) {
 
     renderSearchHistory();
 
-
+    //click event for searched city input
     $('button.list-group-item').on('click', function (event) {
 
-        console.log($(this).text());
+        
 
         var cityClicked = $(this).text();
 
@@ -309,10 +283,12 @@ jQuery(function ($) {
 
 
     });
+    //click event for reset button 
     $('#resetBtn').on('click', function (event) {
         if (localStorage.getItem('cityHistory') !== null){
             $('.list-group-item').remove();  
             localStorage.clear();
+            $('#searchResults').addClass('hidden');
               
         }
         
